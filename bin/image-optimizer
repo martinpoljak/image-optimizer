@@ -1,0 +1,23 @@
+#!/bin/env ruby
+# encoding: utf-8
+# (c) 2011 Martin Kozák (martinkozak@martinkozak.net)
+
+require "image-optimizer"
+require "yaop"
+
+opts = YAOP::get do
+    option "--strip"
+    type Boolean, true
+    
+    option "--level"
+    type Integer, 7
+end
+
+args = {
+    :strip => opts.arguments["--strip"],
+    :level => opts.arguments["--level"]
+}
+
+ImageOptimizer::optimize(opts.parameters, args) do |i|
+    puts i << "\n"
+end
