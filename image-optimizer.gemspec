@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.licenses = [%q{MIT}]
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.4}
-  s.summary = %q{optimizes given JPEG and PNG images or images in given folder.}
+  s.summary = %q{Optimizes given JPEG and PNG images or images in given folder.}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
