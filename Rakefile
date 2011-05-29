@@ -18,11 +18,10 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   
   gem.name = "image-optimizer"
-  gem.homepage = "https://github.com/martinkozak/image-optimizer"
+  gem.homepage = "http://github.com/martinkozak/image-optimizer"
   gem.license = "MIT"
-  gem.summary = "Yet another options parser. Parses the command-line arguments and parameters. Simple, lightweight with nice declarative approach."
+  gem.summary = "optimizes given JPEG and PNG images or images in given folder."
   gem.email = "martinkozak@martinkozak.net"
   gem.authors = ["Martin Kozák"]
-  gem.executables = ["image-optimizer"]
 end
 Jeweler::RubygemsDotOrgTasks.new

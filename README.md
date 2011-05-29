@@ -14,7 +14,7 @@ And for JPEG:
 
 ## Usage
 
-Simply both for filrs or whole directories:
+Simply both for files or whole directories:
     
     ImageOptimizer::optimize("./some-dir", :strip => false, :level => 7) do |file|
         p file    # prints out target filename
@@ -23,6 +23,8 @@ Simply both for filrs or whole directories:
 Where `:strip` option indicates it should strip all metadata from 
 JPEG files. Default is `true`. `:level` indicates level of 
 PNG optimization. Default is `7`.
+
+For *command line* usage see help for the `image-optimizer` command.
 
 ## Requirements
 

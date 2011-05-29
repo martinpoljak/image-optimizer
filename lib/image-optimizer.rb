@@ -109,9 +109,3 @@ module ImageOptimizer
     end
 
 end
-
-=begin
-ImageOptimizer::optimize("./vetservis.cz") do |i|
-    p i
-end
-=end
