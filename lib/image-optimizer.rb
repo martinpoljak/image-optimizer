@@ -94,7 +94,7 @@ module ImageOptimizer
                     Optipng.optimize(path, { :level => opts[:level] })
                 end
                 
-                block.call(path)
+                block.call(path.dup)
             when ".jpg"
                 if Jpegoptim.available?
                     Jpegoptim.optimize(path, opts[:strip].true? ? { :strip => :all } : { })
@@ -104,7 +104,7 @@ module ImageOptimizer
                     Jpegtran.optimize(path, { :optimize => true, :progressive => true })
                 end
                 
-                block.call(path)
+                block.call(path.dup)
         end
     end
 
