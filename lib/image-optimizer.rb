@@ -81,6 +81,8 @@ module ImageOptimizer
         
         case ext
             when ".png"
+                block.call(path.dup)
+                
                 if Whereis.available? :convert
                     begin
                         image = MiniMagick::Image.open(path)
@@ -94,8 +96,9 @@ module ImageOptimizer
                     Optipng.optimize(path, { :level => opts[:level] })
                 end
                 
-                block.call(path.dup)
             when ".jpg"
+                block.call(path.dup)
+                
                 if Jpegoptim.available?
                     Jpegoptim.optimize(path, opts[:strip].true? ? { :strip => :all } : { })
                 end
@@ -103,8 +106,6 @@ module ImageOptimizer
                 if Jpegtran.available?
                     Jpegtran.optimize(path, { :optimize => true, :progressive => true })
                 end
-                
-                block.call(path.dup)
         end
     end
 
