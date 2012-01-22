@@ -84,12 +84,12 @@ module ImageOptimizer
                 block.call(path.dup)
                 
                 if Whereis.available? :convert
-                    begin
-                        image = MiniMagick::Image.open(path)
-                        image.write(path)
-                    rescue MiniMagick::Error
-                        # skips
-                    end
+                    cmd = CommandBuilder::new(:convert, ["-", " ", "-", " "])
+                    cmd << path
+                    cmd.arg(:quality, 100)
+                    cmd << path
+                    
+                    cmd.execute!
                 end
                 
                 if Optipng.available?
