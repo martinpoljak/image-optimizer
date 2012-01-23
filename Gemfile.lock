@@ -2,7 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     abstract (1.0.0)
-    command-builder (0.2.2)
+    command-builder (0.3.0)
       hash-utils (>= 0.18.0)
       pipe-run (>= 0.2.1)
     git (1.2.5)
@@ -42,7 +42,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 1.0.14)
-  command-builder
+  command-builder (>= 0.3.0)
   jeweler2 (>= 2.0.0)
   jpegoptim (>= 0.2.0)
   jpegtran

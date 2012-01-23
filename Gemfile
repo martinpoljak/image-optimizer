@@ -7,7 +7,7 @@ source "http://rubygems.org"
    gem "jpegoptim", ">= 0.2.0"
    gem "unix-whereis"
    gem "options-hash"
-   gem "command-builder"
+   gem "command-builder", ">= 0.3.0"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
