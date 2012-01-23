@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "image-optimizer"
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Martin Koz\u{e1}k"]
-  s.date = "2012-01-22"
+  s.date = "2012-01-23"
   s.email = "martinkozak@martinkozak.net"
   s.executables = ["image-optimizer"]
   s.extra_rdoc_files = [
@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<jpegoptim>, [">= 0.2.0"])
       s.add_runtime_dependency(%q<unix-whereis>, [">= 0"])
       s.add_runtime_dependency(%q<options-hash>, [">= 0"])
-      s.add_runtime_dependency(%q<command-builder>, [">= 0"])
+      s.add_runtime_dependency(%q<command-builder>, [">= 0.3.0"])
       s.add_development_dependency(%q<bundler>, [">= 1.0.14"])
       s.add_development_dependency(%q<jeweler2>, [">= 2.0.0"])
     else
@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jpegoptim>, [">= 0.2.0"])
       s.add_dependency(%q<unix-whereis>, [">= 0"])
       s.add_dependency(%q<options-hash>, [">= 0"])
-      s.add_dependency(%q<command-builder>, [">= 0"])
+      s.add_dependency(%q<command-builder>, [">= 0.3.0"])
       s.add_dependency(%q<bundler>, [">= 1.0.14"])
       s.add_dependency(%q<jeweler2>, [">= 2.0.0"])
     end
@@ -65,7 +65,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jpegoptim>, [">= 0.2.0"])
     s.add_dependency(%q<unix-whereis>, [">= 0"])
     s.add_dependency(%q<options-hash>, [">= 0"])
-    s.add_dependency(%q<command-builder>, [">= 0"])
+    s.add_dependency(%q<command-builder>, [">= 0.3.0"])
     s.add_dependency(%q<bundler>, [">= 1.0.14"])
     s.add_dependency(%q<jeweler2>, [">= 2.0.0"])
   end
