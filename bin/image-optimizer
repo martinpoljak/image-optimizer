@@ -29,8 +29,8 @@ if opts.arguments["--help"]
     puts "\t--strip    indicates it should strip all JPEG files metadata"
     exit
 elsif opts.arguments["--version"]
-    puts "image-optimizer 0.1.0"
-    puts "Copyright (C) 2011 Martin Kozák (martinkozak@martinkozak.net)"
+    puts "image-optimizer 0.1.4"
+    puts "Copyright (C) 2011 - 2012 Martin Kozák (martinkozak@martinkozak.net)"
     puts "Optimizes given JPEG and PNG images or all images in given folders."
     exit
 end
