@@ -8,7 +8,29 @@ require "image-optimizer/png"
 module ImageOptimizer
   
     ##
+    # Indicates, callback is called before the optimization.
+    # @var [Symbol]
+    #
+    
+    BEFORE = :before
+  
+    ##
+    # Indicates, callback is called before the optimization.
+    # @var [Symbol]
+    #
+    
+    AFTER = :after
+    
+    ##
+    # Indicates, callback returns the method.
+    # @var [Symbol]
+    #
+    
+    METHOD = :method
+        
+    ##
     # Optimizers availiability cache.
+    # @var [Hash]
     # 
     
     @optimizers

@@ -11,16 +11,23 @@ module ImageOptimizer
     module Jpeg
         
         def self.optimize(path, &block)
+            
+            # calls back
+            block.call(path.dup, ImageOptimizer::BEFORE)
+            
             if ImageOptimizer.available? :jpegoptim
-                `jpegoptim --strip-all #{path}`
+                block.call(:jpegoptim, ImageOptimizer::METHOD)
+                `jpegoptim --strip-all #{path} 2> /dev/null`
             end
             
             if ImageOptimizer.available? :jpegtran
-                `jpegtran -arithmetic -optimize -progressive -copy none #{path}`
+                block.call(:jpegtran, ImageOptimizer::METHOD)
+                `jpegtran -arithmetic -optimize -progressive -copy none #{path} 2> /dev/null`
             end
             
             # calls back
-            block.call(path.dup)
+            block.call(path.dup, ImageOptimizer::AFTER)
+            
         end
         
     end
