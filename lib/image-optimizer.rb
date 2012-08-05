@@ -9,28 +9,36 @@ module ImageOptimizer
   
     ##
     # Indicates, callback is called before the optimization.
+    #
     # @var [Symbol]
+    # @since 0.2
     #
     
     BEFORE = :before
   
     ##
     # Indicates, callback is called before the optimization.
+    #
     # @var [Symbol]
+    # @since 0.2
     #
     
     AFTER = :after
     
     ##
     # Indicates, callback returns the method.
+    #
     # @var [Symbol]
+    # @since 0.2
     #
     
     METHOD = :method
         
     ##
     # Optimizers availiability cache.
+    #
     # @var [Hash]
+    # @since 0.2
     # 
     
     @optimizers
@@ -103,6 +111,7 @@ module ImageOptimizer
     #
     # @param [Symbol, String] command  command name
     # @return [Boolean]
+    # @since 0.2
     #
     
     def self.available?(command)

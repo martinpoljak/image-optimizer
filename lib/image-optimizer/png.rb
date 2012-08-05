@@ -4,17 +4,19 @@
 require "hash-utils"
 require "fileutils"
 require "tmpdir"
+require "shellwords"
 
 module ImageOptimizer
   
     ##
     # PNG optimizing module.
-    # @since 1.0
+    # @since 0.2
     #
     
     module Png
         
         def self.optimize(path, &block)
+            path_escaped = Shellwords::escape(path)
           
             # calls back
             block.call(path.dup, ImageOptimizer::BEFORE)
@@ -41,7 +43,7 @@ module ImageOptimizer
 
                 # xcf2png
                 block.call(:xcf2png, ImageOptimizer::METHOD)
-                `xcf2png #{xcf_path} > #{png_path} 2> /dev/null`
+                `xcf2png #{Shellwords::escape(xcf_path)} > #{Shellwords::escape(png_path)} 2> /dev/null`
                 FileUtils.rm(xcf_path)
                 
                 if protect
@@ -51,16 +53,17 @@ module ImageOptimizer
             # Old method (ImageMagick)
             elsif ImageOptimizer.available? :convert
                 block.call(:convert, ImageOptimizer::METHOD)
-                `convert #{path} -quality 100 #{path} 2> /dev/null`
+                `convert #{path_escaped} -quality 100 #{path_escaped} 2> /dev/null`
             end
 
             # General optimizers
-            if ImageOptimizer.available? :pngcrush
-                block.call(:pngcrush, ImageOptimizer::METHOD)
-                `pngcrush -reduce -brute -ow #{path} 2> /dev/null`
-            elsif ImageOptimizer.available? :optipng
+            if ImageOptimizer.available? :optipng
                 block.call(:optipng, ImageOptimizer::METHOD)
-                `optipng -o 7 #{path} 2> /dev/null`
+                `optipng -o 7 #{path_escaped} 2> /dev/null`
+            elsif ImageOptimizer.available? :pngcrush
+                block.call(:pngcrush, ImageOptimizer::METHOD)
+                `pngcrush -reduce -brute -ow #{path_escaped} 2> /dev/null`
+
             end            
           
             # calls back
