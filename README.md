@@ -2,10 +2,20 @@ Image Optimizer
 ===============
 
 **Image Optimizer** optimizes given JPEG and PNG images or images in 
-given folder. Performs the following for PNG:
+given folder. Uses several encoders for achieving the best possible 
+*lossless* compression ratio and tries to employ the most advanced 
+methods such as JPEG *algorithmic encoding* if available or PNG 
+*transparent pixels stripping* and automatic color reduction. Performs 
+the following for PNG:
 
-1. rewrites PNG file using `convert`,
-2. optimizes it using `optipng`.
+1. converts the PNG file using `gimp` to the XCF format,
+2. converts XCF back to the PNG without transparent pixels using `xcf2png`,
+3. optimizes it using `pngcrush` or `optipng`.
+
+Or:
+
+1. rewrites the PNG file using `convert`,
+3. optimizes it using `pngcrush` or `optipng`.
 
 And for JPEG:
 
@@ -14,29 +24,21 @@ And for JPEG:
 
 ## Usage
 
-Simply both for files or whole directories:
-    
-    ImageOptimizer::optimize("./some-dir", :strip => false, :level => 7) do |file|
-        p file    # prints out target filename
-    end
-
-Where `:strip` option indicates it should strip all metadata from 
-JPEG files. Default is `true`. `:level` indicates level of 
-PNG optimization. Default is `7`.
-
 For *command line* usage see help for the `image-optimizer` command.
+For usage as *library* see source of the `image-optimizer` command.
 
 ## Requirements
 
 Following software for full functionality is necessary:
 
-* [UNIX][2]-like system (*required*),
 * [Ruby][1] (*required*),
-* [whereis][3] (*required*),
+* [GIMP][3],
+* [Xcftools][4],
 * [ImageMagick][8],
 * [Jpegtran][5],
 * [Jpegoptim][6],
-* [OptiPNG][7].
+* [OptiPNG][7],
+* [Pngcrush][2].
 
 Steps which requires non-strictly required components will be silently 
 ignored if these components will not be available.
@@ -58,9 +60,9 @@ Copyright &copy; 2011 [Martin Kozák][10]. See `LICENSE.txt` for
 further details.
 
 [1]: http://www.ruby-lang.org/
-[2]: http://en.wikipedia.org/wiki/Unix
-[3]: http://en.wikipedia.org/wiki/Linux
-[4]: http://linux.die.net/man/1/whereis
+[2]: http://pmt.sourceforge.net/pngcrush/
+[3]: http://www.gimp.org/
+[4]: http://henning.makholm.net/software#xcftools,
 [5]: http://linux.die.net/man/1/jpegtran
 [6]: http://freshmeat.net/projects/jpegoptim/
 [7]: http://optipng.sourceforge.net/
