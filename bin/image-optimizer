@@ -22,7 +22,7 @@ if opts.arguments["--help"]
     puts "Usage: image-optimizer <arguments> [files or folders]*"
     puts "\t--help     display this help and exit"
     puts "\t--version  output version information and exit"
-    puts "\t--silent   doesn't write anything to output
+    puts "\t--silent   doesn't write anything to output"
     exit
 elsif opts.arguments["--version"]
     puts "image-optimizer 0.2.0"
