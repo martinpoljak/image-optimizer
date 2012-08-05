@@ -2,40 +2,22 @@ GEM
   remote: http://rubygems.org/
   specs:
     abstract (1.0.0)
-    command-builder (0.3.0)
-      hash-utils (>= 0.18.0)
-      pipe-run (>= 0.2.1)
+    facade (1.0.5)
     git (1.2.5)
     hash-utils (2.0.0)
       ruby-version
-    hashie (1.2.0)
     jeweler2 (2.0.9)
       git (>= 1.2.5)
-    jpegoptim (0.2.1)
-      command-builder (>= 0.2.0)
-      unix-whereis (>= 0.1.0)
-    jpegtran (0.1.3)
-      command-builder (>= 0.2.0)
-      hash-utils (>= 0.18.0)
-      unix-whereis (>= 0.1.0)
-    mini_magick (3.4)
-      subexec (~> 0.2.1)
     multitype-introspection (0.2.0)
       hash-utils (>= 0.16.0)
-    options-hash (0.1.0)
-      hashie (>= 1.0.0)
-    optipng (0.2.1)
-      command-builder (>= 0.2.0)
-      unix-whereis (>= 0.1.0)
-    pipe-run (0.3.0)
+    pathname2 (1.6.5)
+      facade
     ruby-version (0.3.1)
-    subexec (0.2.1)
     types (0.1.3)
       abstract (>= 1.0.0)
       multitype-introspection (>= 0.1.0)
-    unix-whereis (0.1.1)
-      command-builder (>= 0.2.0)
-      hash-utils (>= 0.18.0)
+    which (0.0.2)
+      pathname2 (>= 1.4.4)
     yaop (0.1.0)
       hash-utils (>= 0.1.0)
       types (>= 0.1.0)
@@ -45,12 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 1.0.14)
-  command-builder (>= 0.3.0)
+  hash-utils (>= 2.0.0)
   jeweler2 (>= 2.0.0)
-  jpegoptim (>= 0.2.0)
-  jpegtran
-  mini_magick
-  options-hash
-  optipng (>= 0.2.0)
-  unix-whereis
+  which
   yaop
