@@ -57,7 +57,7 @@ module ImageOptimizer
             # General optimizers
             if ImageOptimizer.available? :pngcrush
                 block.call(:pngcrush, ImageOptimizer::METHOD)
-                `pngcrush -brute -reduce -ow #{path} 2> /dev/null`
+                `pngcrush -reduce -brute -ow #{path} 2> /dev/null`
             elsif ImageOptimizer.available? :optipng
                 block.call(:optipng, ImageOptimizer::METHOD)
                 `optipng -o 7 #{path} 2> /dev/null`

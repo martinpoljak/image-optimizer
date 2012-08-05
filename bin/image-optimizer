@@ -22,7 +22,12 @@ if opts.arguments["--help"]
 elsif opts.arguments["--version"]
     puts "image-optimizer 0.2.0"
     puts "Copyright (C) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)"
+    puts
     puts "Optimizes given JPEG and PNG images or all images in given folders."
+    puts "Uses several encoders for achieving the best possible lossless" 
+    puts "compression ratio and tries to employ the most advanced methods"
+    puts "such as JPEG algorithmic encoding if available or PNG transparent" 
+    puts "pixels stripping and automatic color reduction."
     exit
 end
 

@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.name = "image-optimizer"
   gem.homepage = "http://github.com/martinkozak/image-optimizer"
   gem.license = "MIT"
-  gem.summary = "Optimizes given JPEG and PNG images or images in given folder."
+  gem.summary = "Optimizes given JPEG and PNG images or images in given folder. Uses several encoders for achieving the best possible lossless compression ratio and tries to employ the most advanced methods such as JPEG algorithmic encoding if available or PNG transparent pixels stripping and automatic color reduction."
   gem.email = "martinkozak@martinkozak.net"
   gem.authors = ["Martin Kozák"]
 end

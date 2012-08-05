@@ -32,13 +32,14 @@ For usage as *library* see source of the `image-optimizer` command.
 Following software for full functionality is necessary:
 
 * [Ruby][1] (*required*),
+* [Bash][11] (*required*),
 * [GIMP][3],
-* [Xcftools][4],
 * [ImageMagick][8],
 * [Jpegtran][5],
 * [Jpegoptim][6],
 * [OptiPNG][7],
-* [Pngcrush][2].
+* [Pngcrush][2],
+* [Xcftools][4].
 
 Steps which requires non-strictly required components will be silently 
 ignored if these components will not be available.
@@ -69,3 +70,4 @@ further details.
 [8]: http://www.imagemagick.org/
 [9]: http://github.com/martinkozak/image-optimizer/issues
 [10]: http://www.martinkozak.net/
+[11]: http://www.gnu.org/software/bash/

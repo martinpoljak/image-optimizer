@@ -18,8 +18,8 @@ GEM
       multitype-introspection (>= 0.1.0)
     which (0.0.2)
       pathname2 (>= 1.4.4)
-    yaop (0.1.0)
-      hash-utils (>= 0.1.0)
+    yaop (0.2.0)
+      hash-utils (>= 2.0.0)
       types (>= 0.1.0)
 
 PLATFORMS
@@ -30,4 +30,4 @@ DEPENDENCIES
   hash-utils (>= 2.0.0)
   jeweler2 (>= 2.0.0)
   which
-  yaop
+  yaop (>= 0.2.0)
