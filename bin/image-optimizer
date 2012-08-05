@@ -8,13 +8,8 @@ require "yaop"
 # Parses command line
 opts = YAOP::get do
     option "--help"
-    type Boolean, false
-    
     option "--version"
-    type Boolean, false
-    
-    option "--silent"
-    type Boolean, false
+    option "--verbose"
 end
 
 # Shows help or version
@@ -22,7 +17,7 @@ if opts.arguments["--help"]
     puts "Usage: image-optimizer <arguments> [files or folders]*"
     puts "\t--help     display this help and exit"
     puts "\t--version  output version information and exit"
-    puts "\t--silent   doesn't write anything to output"
+    puts "\t--verbose   be verbose"
     exit
 elsif opts.arguments["--version"]
     puts "image-optimizer 0.2.0"
@@ -32,8 +27,40 @@ elsif opts.arguments["--version"]
 end
 
 # Optimizes
-ImageOptimizer::optimize(opts.parameters) do |i|
-    if not opts.arguments["--silent"]
-        puts i << "\n"
+size = nil
+total = 0
+total_new = 0
+verbose = opts.arguments["--verbose"]
+
+if verbose
+    puts "# image-optimizer 0.2.0"
+    puts "# Copyright (C) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)"
+    puts
+end
+
+ImageOptimizer::optimize(opts.parameters) do |data, type|
+    if verbose
+        case type
+            when ImageOptimizer::BEFORE
+                size = File.size(data)
+                total += size
+                puts data
+                STDOUT.write "methods: "
+                
+            when ImageOptimizer::METHOD
+                STDOUT.write data.to_s + " "
+                
+            when ImageOptimizer::AFTER
+                new_size = File.size(data)
+                total_new += new_size
+                ratio = ((size - new_size) / size.to_f) * 100
+                puts "\n" + size.to_s + " B -> " + new_size.to_s + " B (" + ratio.round.to_s + " %)\n\n"
+        end
     end
+end
+
+if verbose
+    delta = total - total_new
+    ratio = (delta / total.to_f) * 100
+    puts "In total: " + delta.to_s + " B (" + ratio.round.to_s + " %)"
 end
