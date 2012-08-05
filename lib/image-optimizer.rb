@@ -2,8 +2,8 @@
 # (c) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)
 
 require "which"
-require "image-optimizer/formats/jpeg"
-require "image-optimizer/formats/png"
+require "image-optimizer/jpeg"
+require "image-optimizer/png"
 
 module ImageOptimizer
   
