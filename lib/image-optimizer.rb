@@ -1,15 +1,17 @@
 # encoding: utf-8
-# (c) 2011 Martin Kozák (martinkozak@martinkozak.net)
+# (c) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)
 
-require "jpegtran"
-require "optipng"
-require "jpegoptim"
-
-require "mini_magick"
-require "unix/whereis"
-require "options-hash" 
+require "which"
+require "image-optimizer/formats/jpeg"
+require "image-optimizer/formats/png"
 
 module ImageOptimizer
+  
+    ##
+    # Optimizers availiability cache.
+    # 
+    
+    @optimizers
     
     ##
     # Optimizes given file or folder.
@@ -18,22 +20,19 @@ module ImageOptimizer
     # optimized files.
     #
     # @param [String, Array] item path or paths to files or directories
-    # @param [Hash] options options for optimizing
     # @param [Proc] block block for giving back the results
-    # @option options [Boolean] :strip indicates it should strip metadata from JPEG files
-    # @option options [Integer] :level indicates level of PNG optimizations
     #
     
-    def self.optimize(item, options = { }, &block)
+    def self.optimize(item, &block)
         if item.kind_of? Array
             item.each do |i|
-                self::optimize(i, options, &block)
+                self::optimize(i, &block)
             end
         else
             if File.file? item
-                self::optimize_file(item, options, &block)
+                self::optimize_file(item, &block)
             elsif File.directory? item
-                self::optimize_directory(item, options, &block)
+                self::optimize_directory(item, &block)
             end
         end
     end
@@ -43,17 +42,14 @@ module ImageOptimizer
     # Yields paths to optimized files.
     #
     # @param [String] item path to directory
-    # @param [Hash] options options for optimizing
     # @param [Proc] block block for giving back the results
-    # @option options [Boolean] :strip indicates it should strip metadata from JPEG files
-    # @option options [Integer] :level indicates level of PNG optimizations
     #
     
-    def self.optimize_directory(item, options = { }, &block)
+    def self.optimize_directory(item, &block)
         Dir.open(item) do |dir|
             dir.each do |i|
                 if i[0].chr != ?.
-                    self::optimize(item + "/" + i, options, &block)
+                    self::optimize(item + "/" + i, &block)
                 end
             end
         end
@@ -64,48 +60,37 @@ module ImageOptimizer
     # Yields paths to optimized files.
     #
     # @param [String] item path to file
-    # @param [Hash] options options for optimizing
     # @param [Proc] block block for giving back the results
-    # @option options [Boolean] :strip indicates it should strip metadata from JPEG files
-    # @option options [Integer] :level indicates level of PNG optimizations
     #
     
-    def self.optimize_file(path, options = { }, &block)
+    def self.optimize_file(path, &block)
         ext = File.extname(path)
-        
-        # Loads options
-        opts = OptionsHash::get(options) [
-            :strip => true,
-            :level => 7
-        ]
         
         case ext
             when ".png"
-                block.call(path.dup)
-                
-                if Whereis.available? :convert
-                    cmd = CommandBuilder::new(:convert, ["-", " ", "-", " "])
-                    cmd << path
-                    cmd.arg(:quality, 100)
-                    cmd << path
-                    
-                    cmd.execute!
-                end
-                
-                if Optipng.available?
-                    Optipng.optimize(path, { :level => opts[:level] })
-                end
-                
+                ImageOptimizer::Png::optimize(path, &block)
+                  
             when ".jpg"
-                block.call(path.dup)
+                ImageOptimizer::Jpeg::optimize(path, &block)
                 
-                if Jpegoptim.available?
-                    Jpegoptim.optimize(path, opts[:strip].true? ? { :strip => :all } : { })
-                end
-                
-                if Jpegtran.available?
-                    Jpegtran.optimize(path, { :optimize => true, :progressive => true })
-                end
+        end
+    end
+    
+    ##
+    # Indicates, optimizer is available.
+    #
+    # @param [Symbol, String] command  command name
+    # @return [Boolean]
+    #
+    
+    def self.available?(command)
+        @optimizers = { } if @optimizers.nil?
+        
+        if command.in? @optimizers
+            return @optimizers[command]
+        else
+            available = (not Which.which(command.to_s).empty?)
+            return @optimizers[command] = available 
         end
     end
 

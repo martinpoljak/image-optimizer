@@ -1,6 +1,6 @@
 #!/bin/env ruby
 # encoding: utf-8
-# (c) 2011 Martin Kozák (martinkozak@martinkozak.net)
+# (c) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)
 
 require "image-optimizer"
 require "yaop"
@@ -13,11 +13,8 @@ opts = YAOP::get do
     option "--version"
     type Boolean, false
     
-    option "--strip"
-    type Boolean, true
-    
-    option "--level"
-    type Integer, 7
+    option "--silent"
+    type Boolean, false
 end
 
 # Shows help or version
@@ -25,22 +22,18 @@ if opts.arguments["--help"]
     puts "Usage: image-optimizer <arguments> [files or folders]*"
     puts "\t--help     display this help and exit"
     puts "\t--version  output version information and exit"
-    puts "\t--level    1-7, intensity of PNG optimization"
-    puts "\t--strip    indicates it should strip all JPEG files metadata"
+    puts "\t--silent   doesn't write anything to output
     exit
 elsif opts.arguments["--version"]
-    puts "image-optimizer 0.1.4"
-    puts "Copyright (C) 2011 - 2012 Martin Kozák (martinkozak@martinkozak.net)"
+    puts "image-optimizer 0.2.0"
+    puts "Copyright (C) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)"
     puts "Optimizes given JPEG and PNG images or all images in given folders."
     exit
 end
 
 # Optimizes
-args = {
-    :strip => opts.arguments["--strip"],
-    :level => opts.arguments["--level"]
-}
-
-ImageOptimizer::optimize(opts.parameters, args) do |i|
-    puts i << "\n"
+ImageOptimizer::optimize(opts.parameters) do |i|
+    if not opts.arguments["--silent"]
+        puts i << "\n"
+    end
 end
