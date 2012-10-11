@@ -76,6 +76,7 @@ module ImageOptimizer
         end
         
         private
+        
         def self.__general_optimizers(path, &block)
             path_escaped = Shellwords::escape(path)
             
