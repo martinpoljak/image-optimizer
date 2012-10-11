@@ -25,7 +25,7 @@ module ImageOptimizer
             if ImageOptimizer.available? :gimp and ImageOptimizer.available? :xcf2png and ImageOptimizer.available? :convert
                 
                 Dir.mktmpdir do |tmpdir|
-                
+                    original_size = File.size(path)                
                     dirname = tmpdir
                     basename = File.basename(path, '.png')
                     basepath = dirname + '/' + basename 
@@ -45,29 +45,47 @@ module ImageOptimizer
 
                     # xcf2png
                     block.call(:xcf2png, ImageOptimizer::METHOD)
-                    `xcf2png #{Shellwords::escape(xcf_path)} > #{Shellwords::escape(path_escaped)} 2> /dev/null`
+                    `xcf2png #{Shellwords::escape(xcf_path)} > #{Shellwords::escape(png_path)} 2> /dev/null`
+                    
+                    # General optimizers
+                    self.__general_optimizers(png_path, &block)
+
+                    # Copy back
+                    new_size = File.size(png_path)
+                    if new_size < original_size
+                        FileUtils.cp(png_path, path)
+                    end
                     
                 end
                 
             # Old method (ImageMagick)
             elsif ImageOptimizer.available? :mogrify
+            
+                # Mogrify
                 block.call(:convert, ImageOptimizer::METHOD)
                 `mogrify #{path_escaped} -quality 100 2> /dev/null`
+            
+                # General optimizers
+                self.__general_optimizers(path, &block)
+                
             end
 
-            # General optimizers
+            # Calls back
+            block.call(path.dup, ImageOptimizer::AFTER)
+            
+        end
+        
+        private
+        def self.__general_optimizers(path, &block)
+            path_escaped = Shellwords::escape(path)
+            
             if ImageOptimizer.available? :optipng
                 block.call(:optipng, ImageOptimizer::METHOD)
                 `optipng -o 7 #{path_escaped} 2> /dev/null`
             elsif ImageOptimizer.available? :pngcrush
                 block.call(:pngcrush, ImageOptimizer::METHOD)
                 `pngcrush -reduce -brute -ow #{path_escaped} 2> /dev/null`
-
-            end            
-          
-            # calls back
-            block.call(path.dup, ImageOptimizer::AFTER)
-            
+            end                 
         end
         
     end
