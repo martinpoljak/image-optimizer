@@ -20,7 +20,7 @@ if opts.arguments["--help"]
     puts "\t--verbose   be verbose"
     exit
 elsif opts.arguments["--version"]
-    puts "image-optimizer 0.2.0"
+    puts "image-optimizer 0.2.2"
     puts "Copyright (C) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)"
     puts
     puts "Optimizes given JPEG and PNG images or all images in given folders."
