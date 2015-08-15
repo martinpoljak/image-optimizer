@@ -44,28 +44,28 @@ if verbose
 end
 
 ImageOptimizer::optimize(opts.parameters) do |data, type|
-    if verbose
-        case type
-            when ImageOptimizer::BEFORE
-                size = File.size(data)
-                total += size
-                puts data
-                STDOUT.write "methods: "
-                
-            when ImageOptimizer::METHOD
-                STDOUT.write data.to_s + " "
-                
-            when ImageOptimizer::AFTER
-                new_size = File.size(data)
-                total_new += new_size
-                ratio = ((size - new_size) / size.to_f) * 100
-                puts "\n" + size.to_s + " B -> " + new_size.to_s + " B (" + ratio.round.to_s + " %)\n\n"
-        end
+    next if not verbose
+
+    case type
+        when ImageOptimizer::BEFORE
+            size = File.size(data)
+            total += size
+            puts data
+            STDOUT.write "methods: "
+            
+        when ImageOptimizer::METHOD
+            STDOUT.write data.to_s + " "
+            
+        when ImageOptimizer::AFTER
+            new_size = File.size(data)
+            total_new += new_size
+            ratio = ((size - new_size) / size.to_f) * 100
+            puts "\n#{size} B -> #{new_size} B (#{ratio.round} %)\n\n"
     end
 end
 
 if verbose
     delta = total - total_new
     ratio = (delta / total.to_f) * 100
-    puts "In total: " + delta.to_s + " B (" + ratio.round.to_s + " %)"
+    puts "In total: #{delta} B (#{ratio.round} %)"
 end
