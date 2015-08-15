@@ -1,7 +1,6 @@
 # encoding: utf-8
-# (c) 2012 Martin Kozák (martinkozak@martinkozak.net)
+# (c) 2012-2015 Martin Poljak (martin@poljak.cz)
 
-require "hash-utils"
 require "fileutils"
 require "tmpdir"
 require "shellwords"

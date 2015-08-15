@@ -3,7 +3,6 @@ source "http://rubygems.org"
 # Example:
    gem "yaop", ">= 0.2.0"
    gem "which"
-   gem "hash-utils", ">= 2.0.0"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
