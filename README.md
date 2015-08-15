@@ -44,20 +44,10 @@ Following software for full functionality is necessary:
 Steps which requires non-strictly required components will be silently 
 ignored if these components will not be available.
 
-Contributing
-------------
-
-1. Fork it.
-2. Create a branch (`git checkout -b 20101220-my-change`).
-3. Commit your changes (`git commit -am "Added something"`).
-4. Push to the branch (`git push origin 20101220-my-change`).
-5. Create an [Issue][9] with a link to your branch.
-6. Enjoy a refreshing Diet Coke and wait.
-
 Copyright
 ---------
 
-Copyright &copy; 2011 [Martin Kozák][10]. See `LICENSE.txt` for
+Copyright &copy; 2011 &ndash; 2015 [Martin Poljak][10]. See `LICENSE.txt` for
 further details.
 
 [1]: http://www.ruby-lang.org/
@@ -69,5 +59,5 @@ further details.
 [7]: http://optipng.sourceforge.net/
 [8]: http://www.imagemagick.org/
 [9]: http://github.com/martinkozak/image-optimizer/issues
-[10]: http://www.martinkozak.net/
+[10]: http://www.martinpoljak.net/
 [11]: http://www.gnu.org/software/bash/

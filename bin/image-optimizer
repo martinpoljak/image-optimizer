@@ -1,6 +1,6 @@
 #!/bin/env ruby
 # encoding: utf-8
-# (c) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)
+# (c) 2011-2015 Martin Poljak (martin@poljak.cz)
 
 require "image-optimizer"
 require "yaop"
@@ -20,8 +20,8 @@ if opts.arguments["--help"]
     puts "\t--verbose   be verbose"
     exit
 elsif opts.arguments["--version"]
-    puts "image-optimizer 0.2.2"
-    puts "Copyright (C) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)"
+    puts "image-optimizer 0.2.3"
+    puts "Copyright (C) 2011-2015 Martin Poljak (martin@poljak.cz)"
     puts
     puts "Optimizes given JPEG and PNG images or all images in given folders."
     puts "Uses several encoders for achieving the best possible lossless" 
@@ -38,8 +38,8 @@ total_new = 0
 verbose = opts.arguments["--verbose"]
 
 if verbose
-    puts "# image-optimizer 0.2.0"
-    puts "# Copyright (C) 2011-2012 Martin Kozák (martinkozak@martinkozak.net)"
+    puts "image-optimizer 0.2.3"
+    puts "Copyright (C) 2011-2015 Martin Poljak (martin@poljak.cz)"
     puts
 end
 
